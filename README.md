@@ -267,7 +267,7 @@ Planned in stages. Each stage is built on top of the one before it:
 CREDITS AND LICENSE
 -------------------
 
-Based on the JS8Call WX Server by skyl4rk: https://github.com/skyl4rk/JS8Call-WX_Server
+Based on the JS8Call WX Server by skyl4rk: https://github.com/skyl4rk/JS8Call-WX_Server and uses the js8net library by Jeff Francis.
 
 This project is released under the MIT license. The license text, including
 the original author's copyright notice and the copyright notice for these
