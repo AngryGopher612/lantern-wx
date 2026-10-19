@@ -1,0 +1,54 @@
+Lantern WX - Changelog
+======================
+
+All notable changes to this project are listed here, newest first.
+Credit goes to the operator who asked for a feature.
+Change requests can be directed to KF0DRT via JS8CALL.
+
+
+UNRELEASED - working toward v1.2
+--------------------------------
+
+Added
+  - SPACE? day 0 now includes the sunspot number, for example SSN88.
+    This is NOAA's predicted smoothed sunspot number for the current month,
+    the same kind of value HF propagation programs such as VOACAP use.
+    It changes about once a month. If NOAA's file cannot be reached, the
+    rest of the reply is still sent without it. Day 1 to 5 replies do not
+    include it.
+    //Requested by K8DDV.//
+
+Changed
+  - Startup message in the command window now shows the Lantern WX name.
+
+
+v1.0 - 2026-10-19 - first public release
+----------------------------------------
+
+Lantern WX is built on the JS8Call WX Server by skyl4rk (MIT license). The
+original commands and behavior are kept.
+
+Added
+  - WXB?   One-line weather brief, METAR-inspired (not an official METAR).
+  - MOON?  Moonrise, moonset, percent illuminated and phase name. Works
+           with no internet.
+  - SUN?   Sunrise and sunset. Works with no internet.
+  - SPACE? Space weather: solar flux, K index and NOAA G/S/R scales for
+           today, plus a 27-day outlook forecast for days 1 to 5.
+           Answers SPACE WX UNAVAIL if NOAA cannot be reached.
+  - README.txt, a Windows install guide (INSTALL_WINDOWS.txt), and an API
+    key guide (GET_API_KEY.txt).
+
+Changed
+  - Pressure shows in inHg when the server is set to imperial units
+    (hPa in metric mode).
+
+
+FEATURE REQUESTS
+----------------
+
+Done
+  - Smoothed sunspot number in SPACE?  (K8DDV)  - in v1.2
+
+Open
+  (none yet)
