@@ -1,0 +1,77 @@
+Lantern WX - How to Get a Free API Key
+======================================
+
+Lantern WX gets its forecasts (WX?, WIND?, WXB?) from OpenWeatherMap.
+You need a free key to use them. It takes about 5 minutes. No credit card
+is needed.
+
+We are working towards a way to pull data from other free sources that don't require any API key. 
+
+You do NOT need a key for SUN?, MOON? or SPACE?.
+
+
+STEPS
+-----
+
+  1. Go to https://openweathermap.org and click "Sign In", then
+     "Create an Account".
+
+  2. Fill in the form. Use a real email address, because you have to
+     confirm it. Agree to the terms and create the account.
+
+  3. Open the confirmation email from OpenWeatherMap and click the link.
+
+  4. Sign in. Click your username at the top right and choose
+     "My API keys". (Direct link: https://home.openweathermap.org/api_keys)
+
+  5. You will see a key already made, named "Default". It is a long string
+     of letters and numbers. Copy it. You can also type a name in the box
+     and click "Generate" to make a new key just for Lantern WX.
+
+  6. Open the Lantern WX script in Notepad (Windows) or a text editor and
+     find the User Definition Area at the top. Paste the key between the
+     quote marks on the API key line. Keep the quote marks. Save the file.
+
+  7. Restart the server so it reads the new key.
+
+
+IMPORTANT: THE KEY MAY NOT WORK RIGHT AWAY
+------------------------------------------
+
+A new key can take anywhere from a few minutes to a couple of hours to
+start working. Until then, weather requests will fail. This is normal.
+Under most circumstances it should be good to go within about 20-30 mins. 
+
+To check whether your key is active, paste this into a web browser. Replace
+YOUR_KEY with your key:
+
+    https://api.openweathermap.org/data/2.5/forecast?lat=40&lon=-100&appid=YOUR_KEY
+
+  - A page full of text and numbers means the key works.
+  - A message that says "Invalid API key" (error 401) means it is not
+    active yet, or it was copied incorrectly. Wait a while and try again,
+    and check that you copied the whole key with no spaces.
+
+
+THE FREE PLAN IS ENOUGH
+-----------------------
+
+For now, Lantern WX only uses the free 5-day forecast. You do not need to subscribe
+to anything. OpenWeatherMap may offer paid plans, or a plan called "One
+Call" that asks for a credit card. Lantern WX does not use that. Skip it.
+
+The free plan has a limit on how many requests you can make per minute and
+per month. A normal JS8Call station will not come near it even if your station is constantly being queried. 
+
+
+KEEP YOUR KEY PRIVATE
+---------------------
+
+  - Do not post your key online or send it to anyone.
+  - Do not upload your edited script to GitHub or share it with the key in
+    it. Anyone with your key can use up your allowance.
+  - If your key gets out, sign in, go to "My API keys", create a new one
+    and delete the old one. Then put the new key in your script.
+
+OpenWeatherMap may change its website over time. If a menu is not where
+this guide says, look for "API keys" in your account.
