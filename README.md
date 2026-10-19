@@ -142,11 +142,12 @@ Space weather is retrieved from the Space Weather Prediction Center.
 
 Day 0 is current conditions:
 
-    SPACE 2026-10-19 OBS SFI137 K0.3 G0 S0 R0
+    SPACE 2026-10-19 OBS SFI137 SSN88 K0.3 G0 S0 R0
 
   OBS      Observed (current) data
   SFI137   Solar flux at 10.7 cm. Higher generally means better HF
            propagation on the higher bands.
+  SSN      Sunspot number for VOACAP use.
   K0.3     Latest planetary K index (geomagnetic activity), 0 to 9
   G0 S0 R0 NOAA scales, 0 (none) to 5 (extreme): G geomagnetic storm,
            S solar radiation storm, R radio blackout
