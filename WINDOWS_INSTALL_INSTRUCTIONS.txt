@@ -1,0 +1,228 @@
+Lantern WX - Windows Install Guide
+==================================
+
+This guide takes you from a fresh Windows PC to a working server. It assumes
+you have never used Python and that you will type commands in "cmd" (the
+Windows Command Prompt). Follow the steps in order. Nothing is skipped.
+
+How long it takes: about 20 minutes, most of it downloading.
+
+
+BEFORE YOU START - WHAT YOU NEED
+--------------------------------
+
+  1. Windows 10 or 11.
+  2. JS8Call installed and already working with your radio, with your
+     callsign and grid set up in its settings.
+  3. An internet connection (needed for the install, and for the weather
+     commands afterwards).
+  4. A free OpenWeatherMap account and API key. This is only needed for
+     the WX?, WIND? and WXB? commands. You can skip it for now and add it
+     later. The MOON?, SUN? and SPACE? commands work without it.
+
+     To get a key: go to https://openweathermap.org, create a free account,
+     and copy the key from the "API keys" page of your account. A new key
+     can take a while to start working, so do this first.
+
+
+STEP 1 - INSTALL PYTHON
+-----------------------
+
+  1. In your web browser, go to https://www.python.org/downloads/
+  2. Click the big yellow "Download Python" button and run the file it
+     downloads. Use Python 3.10 or newer.
+  3. On the FIRST screen of the installer, at the bottom, tick the box
+     "Add python.exe to PATH". This is the step people miss. Do it BEFORE
+     you click anything else.
+  4. Click "Install Now" and wait until it says setup was successful.
+
+Check that it worked:
+
+  1. Click Start, type  cmd  and press Enter. A black window opens.
+  2. Type this and press Enter:
+
+         python --version
+
+  3. You should see something like  Python 3.12.4 . The exact numbers do not
+     matter.
+
+If you see  'python' is not recognized...  close the black window and open a
+new one and try again. If it still fails, you most likely missed the PATH
+box. Run the Python installer again, choose "Modify", and tick the PATH
+option. As a last resort you can type  py  instead of  python  in every
+command in this guide.
+
+
+STEP 2 - DOWNLOAD LANTERN WX
+----------------------------
+
+You do not need Git or any other program.
+
+  1. Go to the Lantern WX page on GitHub: https://github.com/AngryGopher612/lantern-wx
+  2. Click the green "Code" button, then "Download ZIP".
+  3. Open your Downloads folder, right-click the ZIP file, and choose
+     "Extract All...". Extract it to:
+
+         C:\LanternWX
+
+  4. Open that folder and check that you can see these files:
+
+         lantern_wx.py
+         js8net.py
+
+     If you only see one more folder inside (for example lantern-wx-main),
+     open it. The files are in there. In the next steps, use that folder's
+     name in the path.
+
+
+STEP 3 - INSTALL THE ADD-ONS
+---------------------------------------
+
+In the black cmd window, go to the folder, and install the add-ons by typing:
+
+    cd C:\LanternWX
+    python -m pip install requests maidenhead pynput pyautogui
+
+Wait for it to finish. The last line should start with
+"Successfully installed". A few yellow warning lines are normal.
+
+Note: pynput and pyautogui are needed even though you will probably never
+use the mouse-click feature. The program loads them when it starts.
+
+
+STEP 4 - ENTER YOUR SETTINGS
+----------------------------
+
+  1. In the cmd window, type:
+
+         notepad lantern_wx.py
+
+  2. At the very top of the file is the "User Definition Area". Change only
+     these things and leave everything else alone:
+
+       - unit_type: delete the comment (#) above it to choose imperial (mph,
+         degrees F, inches of mercury) or leave it in for metric.
+       - API_key: paste your OpenWeatherMap key between the quote marks.
+         Keep the quote marks.
+       - default_grid: put your own grid square between the quote marks.
+         Use 6 characters, for example 'FN28LK'. This is the place used when
+         someone sends a request without a grid.
+
+  3. Save with Ctrl+S and close Notepad.
+
+Do not share this edited file. It contains your private key.
+
+
+STEP 5 - SET UP JS8CALL
+-----------------------
+
+Lantern WX talks to JS8Call through its built-in API. Open JS8Call, go to
+File, then Settings, and:
+
+  1. On the Reporting tab, in the API section, turn on the TCP server API
+     and tick the box that allows it to accept requests. Leave the port at
+     2442. (This must match the port in the script.)
+  2. Find the "Idle Timeout" setting under "Networking and Autoreply" and set it to Disabled. If you do not,
+     the server stops working after a while.
+  3. Optional: on the Station tab, add @WX to your callsign groups so
+     group requests reach you.
+
+Click OK. Leave JS8Call running.
+
+
+STEP 6 - START THE SERVER
+-------------------------
+
+With JS8Call running, go to the cmd window and type:
+
+    cd C:\LanternWX
+    python lantern_wx.py
+
+You should see:
+
+    Connecting to JS8Call...
+    Connected.
+    [YOURCALL] WX Server Active...
+
+Leave the window open. The server runs as long as it is open. To stop it,
+press Ctrl+C in that window. To start it again, run the same two commands from above if you completely closed the window.
+
+
+STEP 7 - TEST IT
+----------------
+
+Ask a friend, or a second station, to send a directed JS8Call message to
+your callsign:
+
+    [YOURCALL] SUN? EM54DL 0
+
+Test in this order. The first ones need no API key and no internet, so they
+prove the JS8Call link is working before anything else:
+
+    SUN?     sunrise and sunset
+    MOON?    moonrise, moonset and phase
+    SPACE?   space weather (needs the internet, no key)
+    WXB?     one-line weather (needs your API key)
+
+Requests look like this:
+
+    YOURCALL COMMAND [GRID] [DAY]
+
+    Examples:   YOURCALL WXB? DN44YM 1
+                YOURCALL MOON?
+
+The grid and the day are optional. A day is 0 (today) to 5. Times are in UTC.
+See README.txt for what each reply means.
+
+You will see each request and its reply in the cmd window as they happen.
+The server will occasionally "freak out" if there are some characters or requests it doesn't know.
+This is normal. As long as it replies to commands from other stations you're good!
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+
+  'python' is not recognized
+        The PATH box was not ticked in Step 1. See Step 1, or use  py
+        instead of  python.
+
+  ModuleNotFoundError: No module named 'something'
+        An add-on is missing. Run the install command in Step 3 again,
+        making sure there are no typos.
+
+  Connection refused, or it stops at "Connecting to JS8Call..."
+        JS8Call is not running, or its API is not turned on/checked in the settings under reporting, or the port
+        does not match. Recheck Step 5.
+
+  It connects but never answers a request
+        The request may not be going to your callsign. Check that the
+        message was sent to YOUR callsign (not a group), and watch the cmd
+        window to see whether the request shows up at all.
+
+  The weather commands do nothing, but SUN? and MOON? work
+        The API key is wrong, missing, or not active yet. A new key can take
+        a while to start working. Check Step 4 and try again later.
+
+  SPACE? says SPACE WX UNAVAIL
+        The NOAA data could not be reached or has changed format. Check
+        your internet connection and try again in a few minutes.
+
+  The window closes right away
+        Run the program from the cmd window as shown in Step 6 so you can
+        read the error before it closes.
+
+
+UPDATING
+--------
+
+To get a newer version, download the ZIP again and extract it to a NEW
+folder. Copy your API key and settings into the new lantern_wx.py (or copy
+the new files over the old ones and re-enter your settings in Step 4).
+
+
+NEED MORE INFORMATION
+---------------------
+
+README.txt explains every command and reply. Lantern WX is built on the
+JS8Call WX Server by skyl4rk and uses the js8net library by Jeff Francis.
+See the license notices in the project folder.
