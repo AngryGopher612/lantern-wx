@@ -17,6 +17,13 @@ Added
     rest of the reply is still sent without it. Day 1 to 5 replies do not
     include it.
     //Requested by K8DDV.//
+  - NAV?   Distance and true bearing between two places, for example
+           NAV EM35HI>FN31 1033MI BRG098T. One place means "from the server's
+           default grid". Grids or lat, lon both work. Works with no
+           internet.
+  - ANT?   Antenna lengths for a frequency in MHz: returns half-wave dipole and
+           quarter-wave vertical, for example:
+           ANT 14.078MHZ DIPOLE 33.2FT VERT 16.6FT. Works with no internet.
 
 Changed
   - Startup message in the command window now shows the Lantern WX name.
