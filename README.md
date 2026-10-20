@@ -269,11 +269,11 @@ CREDITS AND LICENSE
 -------------------
 
 Based on the JS8Call WX Server by skyl4rk: https://github.com/skyl4rk/JS8Call-WX_Server and uses the js8net library by Jeff Francis.
+Developed with AI assistance.
 
 This project is released under the MIT license. The license text, including
 the original author's copyright notice and the copyright notice for these
-changes, is in the file LICENSE. Keep that file with any copy of this
-project.
+changes, is in the file LICENSE.
 
 Thanks to NOAA (Space Weather Prediction Center and National Weather
 Service), OpenWeatherMap, and the US Naval Observatory, whose published times
