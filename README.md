@@ -53,12 +53,14 @@ Original commands (unchanged except where noted):
   set to imperial units (for example "press 30.15 inHg"). In metric mode it
   still shows hPa/mb.
 
-New commands:
+Commands:
 
   WXB?    One-line weather brief (METAR-inspired, NOT an official METAR).
   MOON?   Moonrise, moonset, how much of the moon is illuminated, as well as moon phase name. (Off grid capable)
   SUN?    Sunrise and sunset. (Off grid capable)
   SPACE?  Space weather: solar flux, geomagnetic K index, NOAA storm scales.
+  NAV?    Distance and compass bearing between two places.
+  ANT?    Antenna length for a frequency (dipole and quarter-wave vertical).
 
 
 WXB? - ONE-LINE WEATHER BRIEF
@@ -170,6 +172,56 @@ If the data cannot be reached or understood, the reply is:
 
     SPACE WX UNAVAIL
 
+NAV? - DISTANCE AND BEARING
+---------------------------
+ 
+Example reply:
+ 
+    NAV EN35MH>FN31 1033MI BRG098T
+ 
+  EN35MH>FN31   From the first place to the second
+  1033MI        Distance over the ground by the shortest route (miles, or KM
+                in metric mode)
+  BRG098T       Direction to head from the first place toward the second, in
+                degrees. 0 is north, 90 is east, 180 is south, 270 is west.
+                The T means TRUE bearing, measured from true north. A
+                magnetic compass will point somewhere different by the
+                local magnetic declination.
+ 
+How to ask:
+ 
+    NAV? FN31             From the server's default grid to FN31
+    NAV? EN35MH FN31      From EN35MH to FN31
+    NAV? 44.5, -93.2 FN31 Coordinates work in either place
+ 
+If you send no place the server replies with a short reminder of the format.
+If both places are the same, only the distance (0) is shown.
+ 
+Accuracy: distance is within about half a percent (the Earth is treated as a
+perfect sphere). A grid square is treated as its center point, so a 4-character
+grid can be off by tens of miles. Use a 6-character grid or coordinates when it
+matters. Works with no internet.
+ 
+ 
+ANT? - ANTENNA LENGTH
+---------------------
+ 
+Example reply:
+ 
+    ANT 14.078MHZ DIPOLE 33.2FT TOTAL VERT 16.6FT
+ 
+  14.078MHZ   The frequency you asked for, in MHz
+  DIPOLE ... TOTAL
+              Total length of a half-wave dipole wire, both sides together
+              (each side is half of the number shown)
+  VERT        Length of a quarter-wave vertical, used with radials of the same
+              length
+ 
+Ask with the frequency in MHz, for example ANT? 7.078. In metric mode the
+lengths are in meters. The numbers come from the common rules of thumb
+468 / MHz and 234 / MHz (feet). Treat them as a starting point: wire type,
+height and nearby objects all move the real resonance, so trim with an SWR
+meter or antenna analyzer if you have one. Works with no internet.
 
 OFFLINE CAPABILITY
 ------------------
