@@ -6,7 +6,7 @@ Credit goes to the operator who asked for a feature.
 Change requests can be directed to KF0DRT via JS8CALL.
 
 
-UNRELEASED - working toward v1.2
+v1.2 - 2026-10-28 - first update
 --------------------------------
 
 Added
