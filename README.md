@@ -14,6 +14,20 @@ Goal of this project: Add functionality for preparedness minded individuals, and
 over time, make it keep working when the internet does not (see ROADMAP).
 
 
+DATA SOURCES
+------------
+
+  OpenWeatherMap    Forecasts (WX?, WIND?, WXB?). API key required (it's free!).
+  US National Weather Service (api.weather.gov)
+                    Active weather alerts for US locations. No key.
+  NOAA Space Weather Prediction Center (services.swpc.noaa.gov)
+                    Solar flux, K index, storm scales, 27-day outlook.
+                    No key. The format of these files can change, which is
+                    why SPACE? answers "SPACE WX UNAVAIL" instead of failing.
+  Sun and moon      Calculated locally using published low-precision
+                    astronomical formulas. No data source.
+                    
+
 WHAT IT DOES
 ------------
 
@@ -271,19 +285,6 @@ Setup:
   3. Start JS8Call, then start the script.
   4. From another station, send the server a command, for example
      "<SERVER CALLSIGN> SPACE?". You can also have another station forward you a request from yourself.
-
-DATA SOURCES
-------------
-
-  OpenWeatherMap    Forecasts (WX?, WIND?, WXB?). API key required (it's free!).
-  US National Weather Service (api.weather.gov)
-                    Active weather alerts for US locations. No key.
-  NOAA Space Weather Prediction Center (services.swpc.noaa.gov)
-                    Solar flux, K index, storm scales, 27-day outlook.
-                    No key. The format of these files can change, which is
-                    why SPACE? answers "SPACE WX UNAVAIL" instead of failing.
-  Sun and moon      Calculated locally using published low-precision
-                    astronomical formulas. No data source.
 
 
 KNOWN LIMITATIONS
