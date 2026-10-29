@@ -14,7 +14,7 @@ API_key = [INSERT YOUR API KEY HERE]
 
 # If no grid is specified or of the wrong format, then a default grid will be used.
 # Set the default maidenhead gridsquare here:
-default_grid = 'EN35MH'
+default_grid = [INSERT YOUR PREFERRED GRID HERE]
 
 # To enable email forwarding, uncomment ENABLE_EMAIL = True and add email account information below.
 ENABLE_EMAIL = False
